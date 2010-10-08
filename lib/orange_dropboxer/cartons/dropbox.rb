@@ -6,6 +6,7 @@ class Dropbox < Orange::Carton
   timestamps :at
   admin do
     title :bucket_name
+    text :token_salt
     fulltext :description
   end
   text :token
@@ -15,12 +16,12 @@ class Dropbox < Orange::Carton
     reset_token!
   end
   
-  def description=(val)
-    attribute_set(:description, val)
+  def token_salt=(val)
+    attribute_set(:token_salt, val)
     reset_token!
   end
   
   def reset_token!
-    attribute_set(:token, Digest::MD5.hexdigest("#{updated_at}-#{bucket_name}-#{description}"))
+    attribute_set(:token, Digest::MD5.hexdigest("#{updated_at}-#{bucket_name}-#{token_salt}"))
   end
 end
