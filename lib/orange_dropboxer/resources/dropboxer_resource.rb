@@ -15,7 +15,11 @@ class Orange::DropboxerResource < Orange::ModelResource
   end
   
   def list(packet, opts = {})
-    'foo'
+    if(m = model_class.first(:bucket_name => packet['route.resource_path']))
+      show(packet, opts = {:model => m})
+    else
+      packet.reroute('/')
+    end
   end
   
   def auth(packet, opts = {})
