@@ -12,6 +12,7 @@ class Dropbox < Orange::Carton
   text :token
   
   def bucket_name=(val)
+    val = "osb-dropbox-#{val}" unless val =~ /^osb-dropbox-/
     attribute_set(:bucket_name, val)
     reset_token!
   end
