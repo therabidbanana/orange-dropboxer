@@ -10,8 +10,17 @@ class Dropbox < Orange::Carton
   end
   text :token
   
-  def updated_at=(val)
-    attribute_set(:updated_at, val)
-    attribute_set(:token, Digest::MD5.hexdigest("#{val}-#{bucket_name}-#{description}"))
+  def bucket_name=(val)
+    attribute_set(:bucket_name, val)
+    reset_token!
+  end
+  
+  def description=(val)
+    attribute_set(:description, val)
+    reset_token!
+  end
+  
+  def reset_token!
+    attribute_set(:token, Digest::MD5.hexdigest("#{updated_at}-#{bucket_name}-#{description}"))
   end
 end
