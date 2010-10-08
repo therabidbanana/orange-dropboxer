@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors      = ["David Haslem"]
   s.email        = "therabidbanana@gmail.com"
   s.homepage     = "http://github.com/therabidbanana/orange-dropboxer"
-  s.summary      = "[summary]"
-  s.description  = "[description]"
+  s.summary      = "Gives S3 dropboxes to Orange sites"
+  s.description  = "Gives S3 dropboxes to Orange sites"
 
   s.files        = `git ls-files app lib`.split("\n")
   s.platform     = Gem::Platform::RUBY
