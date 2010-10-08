@@ -14,9 +14,13 @@ class Orange::DropboxerResource < Orange::ModelResource
     
   end
   
+  def list(packet, opts = {})
+    'foo'
+  end
+  
   def auth(packet, opts = {})
     packet.session['auth_token'] = packet['route.resource_path']
-    packet.reroute(packet.route_to(:dropboxer, packet['route.resource_id']), :orange)
+    packet.reroute([:dropboxer, packet['route.resource_id']], :orange)
   end
   
 end
