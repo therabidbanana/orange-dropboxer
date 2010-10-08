@@ -13,15 +13,6 @@ class Orange::DropboxerResource < Orange::ModelResource
   def authorize!(packet, opts = {})
     
   end
-  
-  def list(packet, opts = {})
-    if(m = model_class.first(:bucket_name => packet['route.resource_path']))
-      show(packet, opts = {:model => m})
-    else
-      packet.reroute('/')
-    end
-  end
-  
   def auth(packet, opts = {})
     packet.session['auth_token'] = packet['route.resource_path']
     packet.reroute([:dropboxer, packet['route.resource_id']], :orange)
