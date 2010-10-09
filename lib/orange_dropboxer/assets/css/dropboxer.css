@@ -29,10 +29,28 @@
 	border: 1px solid #ddd;
 }
 
-.s3_file_uploads .file span{
+.s3_file_uploads .file{
 	font-size: 0.8em;
+	position:relative;
+	
 }
 
+.s3_file_uploads .file span.progress{
+	position: absolute;
+	width: 0%;
+	max-width: 99%;
+	height: 1.4em;
+	margin: 0.1em;
+	background-color: #ddf;
+	z-index: 1;
+}
+
+
+.s3_file_uploads .file span.file_name{
+	z-index: 2;
+	position: relative;
+	margin-left: 1em;
+}
 
 .s3_file_uploads .add{
 	margin: 0.2em;
