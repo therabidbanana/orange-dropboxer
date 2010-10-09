@@ -1,1 +1,35 @@
-%h1= model.bucket_name
+- add_js('jquery.s3upload.js', :module => '_dropboxer_')
+- add_js('jquery.lightbox.js', :module => '_dropboxer_')
+- add_js('dropboxer.js', :module => '_dropboxer_')
+- add_css('dropboxer.css', :module => '_dropboxer_')
+:javascript
+  var s3_signature_url = "#{packet['route.path']}/upload";
+.dropboxer
+  %h1= model.bucket_name
+  .description= model.description
+  - bucket = model.s3_bucket
+  .directories
+    - files.each do |dir, file_list|
+      .directory
+        .files
+          .actions
+            %a.all{:href => "#"} Select All
+            |
+            %a.none{:href => "#"} Select None
+          - unless dir == "/"
+            %h2 #{dir}
+          - file_list.each do |file|
+            - unless file.path == "/#{bucket}/crossdomain.xml"
+              .file{:class => file.content_type =~ /image\// ? "image" : "doc"}
+                %input{:type => "checkbox"}
+                %a{:href => file.url(:expires_in => 60 * 60 * 3)}= file.path.sub("/#{bucket}/", '')
+          .add_files
+            %form.new_files{}
+              %noscript You must enable javascript to upload files
+              %input.folder{:type => "hidden", :value => "#{dir}/"}
+              .mr_new_element.s3_file_uploads
+                .add Click to add new Files
+              %input{:type => "submit", :value => "Upload"}
+  %a.add_new_directory{:href => "#"} Add New Folder
+  %a.download{:href => "#"} Download Selected (not images)
+  %iframe{:src=>"", :id=>"download-iframe", :style=>"display:none;"} no iframes

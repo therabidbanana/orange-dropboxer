@@ -11,7 +11,9 @@ Gem::Specification.new do |s|
   s.homepage     = "http://github.com/therabidbanana/orange-dropboxer"
   s.summary      = "Gives S3 dropboxes to Orange sites"
   s.description  = "Gives S3 dropboxes to Orange sites"
-
+  
+  s.add_dependency "aws-s3", ">= 0"
+  s.add_dependency "s3upload", ">= 0"
   s.files        = `git ls-files app lib`.split("\n")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'

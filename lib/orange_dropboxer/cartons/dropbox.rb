@@ -8,6 +8,7 @@ class Dropbox < Orange::Carton
     title :bucket_name
     text :token_salt
     fulltext :description
+    fulltext :authorized_ids
   end
   text :s3_bucket, :length => 64
   text :token
