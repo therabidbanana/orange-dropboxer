@@ -26,8 +26,14 @@ class Orange::DropboxerResource < Orange::ModelResource
     model = opts[:model] || find_one(packet, :auth, packet['route.resource_id'])
     if(model && packet.session['dropboxer.auth_token'] == model.token)
       authorized = true
-    elsif(model && model.authorized_ids.split("\n").collect{|a| a.strip}.include?(packet['user.id']))
-      authorized = true
+    elsif(model)
+      list_allowed = model.authorized_ids.split("\n").collect{|a| a.strip}
+      packet['dropboxer.allowed'] = list_allowed
+      if list_allowed.include?(packet['user.id'])
+        authorized = true
+      elsif orange[:users, true].access_allowed?(packet, packet['user.id'])
+        authorized = true
+      end
     end
     unless(authorized)
       if packet["user.id"]
