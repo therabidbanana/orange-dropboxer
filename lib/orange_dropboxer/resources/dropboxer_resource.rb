@@ -71,7 +71,7 @@ class Orange::DropboxerResource < Orange::ModelResource
   
   def show(packet, opts = {})
     authorize!(packet, opts)
-    
+    opts[:model] ||= find_one(packet, :show, packet['route.resource_id'])
     files = bucket_ls(opts[:model].s3_bucket)
     
     super(packet, opts.merge(:files => files))
