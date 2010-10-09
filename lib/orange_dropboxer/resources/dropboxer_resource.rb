@@ -122,7 +122,7 @@ class Orange::DropboxerResource < Orange::ModelResource
     token = opts[:token] || packet['route.resource_path'].split('/').last
     if(m = model_class.first(:token => token))
       packet.session['dropboxer.auth_token'] = token
-      packet.reroute(reroute_root ? reroute_root + "/#{m.bucket_name}" : [:dropboxer, m.id], reroute_root ? :real : :orange)
+      packet.reroute(reroute_root ? reroute_root + "#{m.bucket_name}" : [:dropboxer, m.id], reroute_root ? :real : :orange)
     else
       packet.reroute(packet.root_url)
     end
