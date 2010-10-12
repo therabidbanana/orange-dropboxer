@@ -1,7 +1,10 @@
 - add_js('jquery.s3upload.js', :module => '_dropboxer_')
-- add_js('jquery.lightbox.js', :module => '_dropboxer_')
+- add_js('jquery.easing.pack.js', :module => '_dropboxer_')
+- add_js('jquery.mousewheel.pack.js', :module => '_dropboxer_')
+- add_js('jquery.fancybox.pack.js', :module => '_dropboxer_')
 - add_js('dropboxer.js', :module => '_dropboxer_')
 - add_css('dropboxer.css', :module => '_dropboxer_')
+- add_css('jquery.fancybox.css', :module => '_dropboxer_')
 :javascript
   var s3_signature_url = "#{packet['route.path']}/upload";
 .dropboxer
