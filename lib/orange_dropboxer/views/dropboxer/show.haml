@@ -31,7 +31,7 @@
               - begin
                 .file{:class => file.content_type =~ /image\// ? "image" : "doc"}
                   / %input{:type => "checkbox", :disabled => (file.content_type =~ /image\//)}
-                  %a{:href => file.url(:expires_in => 60 * 60 * 3)}= file.path.sub("/#{bucket}/", '')
+                  %a{:href => file.url(:expires_in => 60 * 60 * 3), :title => file.path.sub("/#{bucket}/", '')}= file.path.sub("/#{bucket}/", '')
               - rescue
                 .file
                   Cache outdated... (refresh)
