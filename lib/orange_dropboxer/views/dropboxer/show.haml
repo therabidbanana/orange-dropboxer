@@ -13,7 +13,7 @@
     = markdown(model.description)
     %p
       Bucket Url: 
-      %a{:href => "http://#{packet['route.site_url']}#{resource.bucket_path(packet)}auth/#{model.token}"} http://#{packet['route.site_url']}#{resource.bucket_path(packet)}auth/#{model.token}
+      %a{:href => "#{packet.request.scheme}://#{packet['route.site_url']}#{resource.bucket_path(packet)}auth/#{model.token}"} #{packet.request.scheme}//#{packet['route.site_url']}#{resource.bucket_path(packet)}auth/#{model.token}
   - bucket = model.s3_bucket
   .directories
     - files.each do |dir, file_list|
